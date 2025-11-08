@@ -121,10 +121,10 @@ function renderCharts(data) {
                 x: {
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 5, // Reduced max ticks for mobile
                         callback: function(value, index, ticks) {
-                            const year = value.substring(0, 4);
-                            const month = value.substring(5, 7);
+                            const labelText = labels[index]; // Use labels array
+                            const year = labelText.substring(0, 4);
+                            const month = labelText.substring(5, 7);
                             if (month === '01') {
                                 return "'" + year.substring(2);
                             }
@@ -269,8 +269,9 @@ function renderCharts(data) {
                         autoSkip: true,
                         maxTicksLimit: 5, // Further reduced max ticks for mobile
                         callback: function(value, index, ticks) {
-                            const year = value.substring(0, 4);
-                            const month = value.substring(5, 7);
+                            const labelText = labels[index]; // Use labels array
+                            const year = labelText.substring(0, 4);
+                            const month = labelText.substring(5, 7);
                             if (month === '01') {
                                 return "'" + year.substring(2);
                             }
