@@ -121,10 +121,10 @@ function renderCharts(data) {
                 x: {
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 5, // Ensure max ticks limit is 5
+                        maxTicksLimit: 6, // Ensure max ticks limit is 6
                         callback: function(value, index, ticks) {
                             const totalLabels = labels.length;
-                            const desiredTicks = 5; // Target 5 labels
+                            const desiredTicks = 6; // Target 6 labels
                             const interval = Math.ceil(totalLabels / desiredTicks);
 
                             if (index % interval === 0) {
@@ -271,10 +271,10 @@ function renderCharts(data) {
                 x: {
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 5, // Ensure max ticks limit is 5
+                        maxTicksLimit: 6, // Ensure max ticks limit is 6
                         callback: function(value, index, ticks) {
                             const totalLabels = labels.length;
-                            const desiredTicks = 5; // Target 5 labels
+                            const desiredTicks = 6; // Target 6 labels
                             const interval = Math.ceil(totalLabels / desiredTicks);
 
                             if (index % interval === 0) {
