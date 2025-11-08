@@ -87,14 +87,14 @@ function renderCharts(data) {
                     display: true,
                     text: 'KOSPI (^KS11) and USD/KRW Exchange Rate, and US Interest Rate (since 2015)',
                     font: {
-                        size: 16
+                        size: 12 // Reduced font size for mobile
                     },
                     align: 'center'
                 },
                 legend: {
                     labels: {
                         font: {
-                            size: 16
+                            size: 12 // Reduced font size for mobile
                         }
                     }
                 },
@@ -118,7 +118,7 @@ function renderCharts(data) {
                 x: {
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 20
+                        maxTicksLimit: 10 // Reduced max ticks for mobile
                     }
                 },
                 y: {
@@ -222,14 +222,14 @@ function renderCharts(data) {
                     display: true,
                     text: 'US and Korea Interest Rates & Difference (since 2015)',
                     font: {
-                        size: 16
+                        size: 12 // Reduced font size for mobile
                     },
                     align: 'center'
                 },
                 legend: {
                     labels: {
                         font: {
-                            size: 16
+                            size: 12 // Reduced font size for mobile
                         }
                     }
                 },
@@ -253,7 +253,7 @@ function renderCharts(data) {
                 x: {
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 20
+                        maxTicksLimit: 10 // Reduced max ticks for mobile
                     }
                 },
                 y: {

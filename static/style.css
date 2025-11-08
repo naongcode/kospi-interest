@@ -9,7 +9,7 @@ h1 {
 .chart-container {
     width: 80%;
     margin: auto;
-    max-height: 400px; /* Adjust as needed */
+    /* max-height: 400px; */ /* Adjust as needed */
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically (if needed) */
