@@ -127,7 +127,7 @@ function renderCharts(data) {
                 y: {
                     type: 'linear',
                     display: true,
-                    position: 'left',
+                    position: 'right', // Changed position to right
                     title: {
                         display: true,
                         text: 'KOSPI', // Changed title
@@ -157,7 +157,7 @@ function renderCharts(data) {
                 y2: {
                     type: 'linear',
                     display: true,
-                    position: 'right',
+                    position: 'left', // Changed position to left
                     title: {
                         display: true,
                         text: 'US IR (%)', // Changed to abbreviation
