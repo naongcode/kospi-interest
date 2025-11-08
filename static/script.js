@@ -51,7 +51,6 @@ function renderCharts(data) {
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 yAxisID: 'y',
                 spanGaps: true,
-                hidden: true // Hide KOSPI by default
             },
             {
                 label: 'USD/KRW Exchange Rate',
@@ -96,10 +95,6 @@ function renderCharts(data) {
                 legend: {
                     position: 'bottom', // Move legend to bottom
                     labels: {
-                        filter: function(legendItem, chartData) {
-                            // Only show USD/KRW and US IR in legend
-                            return legendItem.text === 'USD/KRW Exchange Rate' || legendItem.text === 'US IR';
-                        },
                         font: {
                             size: 12 // Reduced font size for mobile
                         }
