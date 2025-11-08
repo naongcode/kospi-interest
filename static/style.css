@@ -4,6 +4,7 @@ body {
 
 h1 {
     text-align: center;
+    font-size: 1.5em; /* Reduced font size for the main title */
 }
 
 .chart-container {

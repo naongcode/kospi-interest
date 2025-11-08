@@ -88,7 +88,7 @@ function renderCharts(data) {
                     display: true,
                     text: 'USD/KRW, KOSPI, and US IR (since 2015)', // Updated title
                     font: {
-                        size: 12 // Reduced font size for mobile
+                        size: 10 // Further reduced font size for mobile
                     },
                     align: 'center'
                 },
@@ -152,7 +152,7 @@ function renderCharts(data) {
                     grid: {
                         drawOnChartArea: false,
                     },
-                    max: 2000 // Set max value for exchange rate axis
+                    // max: 2000 // Set max value for exchange rate axis - Removed to allow auto-scaling
                 },
                 y2: {
                     type: 'linear',
@@ -226,7 +226,7 @@ function renderCharts(data) {
                     display: true,
                     text: 'US and KR IR & Diff (since 2015)', // Updated title
                     font: {
-                        size: 12 // Reduced font size for mobile
+                        size: 10 // Further reduced font size for mobile
                     },
                     align: 'center'
                 },
