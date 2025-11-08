@@ -124,11 +124,7 @@ function renderCharts(data) {
                         callback: function(value, index, ticks) {
                             const labelText = labels[index]; // Use labels array
                             const year = labelText.substring(0, 4);
-                            const month = labelText.substring(5, 7);
-                            if (month === '01') {
-                                return "'" + year.substring(2);
-                            }
-                            return null;
+                            return "'" + year.substring(2); // Always return year
                         }
                     }
                 },
@@ -271,11 +267,7 @@ function renderCharts(data) {
                         callback: function(value, index, ticks) {
                             const labelText = labels[index]; // Use labels array
                             const year = labelText.substring(0, 4);
-                            const month = labelText.substring(5, 7);
-                            if (month === '01') {
-                                return "'" + year.substring(2);
-                            }
-                            return null;
+                            return "'" + year.substring(2); // Always return year
                         }
                     }
                 },
