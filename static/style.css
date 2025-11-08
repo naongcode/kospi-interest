@@ -11,7 +11,7 @@ h1 {
     width: 80%;
     margin: auto;
     min-height: 300px; /* Set a minimum height for better visibility on mobile */
-    /* max-height: 400px; */ /* Adjust as needed */
+    max-height: 400px; /* Adjust as needed */
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically (if needed) */
