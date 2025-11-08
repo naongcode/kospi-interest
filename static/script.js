@@ -77,6 +77,7 @@ function renderCharts(data) {
         data: mainChartData,
         options: {
             responsive: true,
+            maintainAspectRatio: false, // Disable aspect ratio to allow flexible height
             interaction: {
                 mode: 'index',
                 intersect: false,
@@ -92,6 +93,7 @@ function renderCharts(data) {
                     align: 'center'
                 },
                 legend: {
+                    position: 'bottom', // Move legend to bottom
                     labels: {
                         font: {
                             size: 12 // Reduced font size for mobile
@@ -212,6 +214,7 @@ function renderCharts(data) {
         data: interestRateChartData,
         options: {
             responsive: true,
+            maintainAspectRatio: false, // Disable aspect ratio to allow flexible height
             interaction: {
                 mode: 'index',
                 intersect: false,
@@ -227,6 +230,7 @@ function renderCharts(data) {
                     align: 'center'
                 },
                 legend: {
+                    position: 'bottom', // Move legend to bottom
                     labels: {
                         font: {
                             size: 12 // Reduced font size for mobile
