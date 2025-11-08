@@ -1,0 +1,293 @@
+const CACHE_KEY = 'chartDataCache';
+const CACHE_DATE_KEY = 'chartDataCacheDate';
+
+function fetchAndRenderChart() {
+    fetch('/data')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Received data:', data);
+
+            // Store data in localStorage
+            localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+            localStorage.setItem(CACHE_DATE_KEY, new Date().toISOString().slice(0, 10));
+
+            renderCharts(data);
+        })
+        .catch(error => console.error('Error fetching chart data:', error));
+}
+
+function renderCharts(data) {
+    const { interest_rates, kospi_prices, exchange_rates, korea_interest_rates, interest_rate_difference } = data;
+
+    // 1. Create a common set of labels (YYYY-MM) from all datasets and sort them
+    const allDates = new Set([
+        ...Object.keys(interest_rates),
+        ...Object.keys(kospi_prices),
+        ...Object.keys(exchange_rates),
+        ...Object.keys(korea_interest_rates),
+        ...Object.keys(interest_rate_difference)
+    ]);
+    const labels = Array.from(allDates).sort();
+
+    // 2. Align data to the common labels. Use null for missing data points.
+    const alignData = (data, labels) => {
+        return labels.map(label => data[label] || null);
+    };
+
+    const alignedInterestRates = alignData(interest_rates, labels);
+    const alignedKospiPrices = alignData(kospi_prices, labels);
+    const alignedExchangeRates = alignData(exchange_rates, labels);
+    const alignedKoreaInterestRates = alignData(korea_interest_rates, labels);
+    const alignedInterestRateDifference = alignData(interest_rate_difference, labels);
+
+    // --- Main Chart Configuration (KOSPI, USD/KRW, US Interest Rate) ---
+    const mainChartData = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'KOSPI (^KS11)',
+                data: alignedKospiPrices,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                yAxisID: 'y',
+                spanGaps: true,
+            },
+            {
+                label: 'USD/KRW Exchange Rate',
+                data: alignedExchangeRates,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                yAxisID: 'y1',
+                spanGaps: true,
+            },
+            {
+                label: 'US Interest Rate',
+                data: alignedInterestRates,
+                borderColor: 'rgba(153, 102, 255, 1)',
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                yAxisID: 'y2',
+                spanGaps: true,
+                hidden: true // Inactive by default
+            }
+        ]
+    };
+
+    const mainChartConfig = {
+        type: 'line',
+        data: mainChartData,
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            stacked: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'KOSPI (^KS11) and USD/KRW Exchange Rate, and US Interest Rate (since 2015)',
+                    font: {
+                        size: 16
+                    },
+                    align: 'center'
+                },
+                legend: {
+                    labels: {
+                        font: {
+                            size: 16
+                        }
+                    }
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x'
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true,
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x',
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 20
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'KOSPI (^KS11)',
+                        color: 'rgba(255, 99, 132, 1)'
+                    },
+                    ticks: {
+                        color: 'rgba(255, 99, 132, 1)'
+                    }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: 'USD/KRW',
+                        color: 'rgba(54, 162, 235, 1)'
+                    },
+                    ticks: {
+                        color: 'rgba(54, 162, 235, 1)'
+                    },
+                    grid: {
+                        drawOnChartArea: false,
+                    },
+                    max: 2000 // Set max value for exchange rate axis
+                },
+                y2: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: 'US Interest Rate (%)',
+                        color: 'rgba(153, 102, 255, 1)'
+                    },
+                    ticks: {
+                        color: 'rgba(153, 102, 255, 1)'
+                    },
+                    grid: {
+                        drawOnChartArea: false,
+                    },
+                }
+            }
+        },
+    };
+
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        mainChartConfig
+    );
+
+    // --- Interest Rate Chart Configuration (US & Korea) ---
+    const interestRateChartData = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'US Interest Rate',
+                data: alignedInterestRates,
+                borderColor: 'rgba(153, 102, 255, 1)',
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                yAxisID: 'y', // Use 'y' for the first axis in this chart
+                spanGaps: true,
+            },
+            {
+                label: 'Korea Interest Rate',
+                data: alignedKoreaInterestRates,
+                borderColor: 'rgba(75, 192, 75, 1)',
+                backgroundColor: 'rgba(75, 192, 75, 0.2)',
+                yAxisID: 'y', // Use 'y' for the first axis in this chart
+                spanGaps: true,
+            },
+            {
+                label: 'Interest Rate Difference (US - KR)',
+                data: alignedInterestRateDifference,
+                borderColor: 'rgba(255, 159, 64, 1)', // Orange color
+                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                yAxisID: 'y',
+                spanGaps: true,
+            }
+        ]
+    };
+
+    const interestRateChartConfig = {
+        type: 'line',
+        data: interestRateChartData,
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            stacked: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'US and Korea Interest Rates & Difference (since 2015)',
+                    font: {
+                        size: 16
+                    },
+                    align: 'center'
+                },
+                legend: {
+                    labels: {
+                        font: {
+                            size: 16
+                        }
+                    }
+                },
+                zoom: {
+                    pan: {
+                        enabled: true,
+                        mode: 'x'
+                    },
+                    zoom: {
+                        wheel: {
+                            enabled: true,
+                        },
+                        pinch: {
+                            enabled: true
+                        },
+                        mode: 'x',
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 20
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: 'Interest Rate (%)',
+                        color: 'rgba(153, 102, 255, 1)' // Keep US color as primary
+                    },
+                    ticks: {
+                        color: 'rgba(153, 102, 255, 1)'
+                    }
+                }
+            }
+        },
+    };
+
+    const interestRateChart = new Chart(
+        document.getElementById('interestRateChart'),
+        interestRateChartConfig
+    );
+}
+
+// Main execution flow
+const cachedData = localStorage.getItem(CACHE_KEY);
+const cachedDate = localStorage.getItem(CACHE_DATE_KEY);
+const today = new Date().toISOString().slice(0, 10);
+
+if (cachedData && cachedDate === today) {
+    console.log('Loading data from browser cache.');
+    renderCharts(JSON.parse(cachedData));
+} else {
+    console.log('Fetching new data from backend.');
+    fetchAndRenderChart();
+}

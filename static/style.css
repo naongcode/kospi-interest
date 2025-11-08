@@ -1,0 +1,21 @@
+body {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.chart-container {
+    width: 80%;
+    margin: auto;
+    max-height: 390px; /* Adjust as needed */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically (if needed) */
+}
+
+.chart-container canvas {
+    width: 100%;
+    height: auto;
+}

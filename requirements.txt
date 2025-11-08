@@ -1,0 +1,5 @@
+Flask
+yfinance
+fredapi
+pandas
+requests
