@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
     <marker id="arrowhead" markerWidth="4" markerHeight="4"
-    refX="4" refY="2" orient="auto">
-      <polygon points="1 0, 5 2, 1 4" fill="red" />
+    refX="3" refY="2" orient="auto">
+      <polygon points="2 0, 4 2, 2 4" fill="red" />
     </marker>
   </defs>
 
-  <!-- Graph line with steeper upward trend, moved further up and right -->
-  <polyline points="25,50 45,30 65,40 80,17 85,10" fill="none" stroke="red" stroke-width="5" marker-end="url(#arrowhead)"/>
+  <!-- Graph line with steeper upward trend, moved down by 10 -->
+  <polyline points="27,58 47,38 67,48 82,28 85,23" fill="none" stroke="red" stroke-width="5" marker-end="url(#arrowhead)"/>
 </svg>
