@@ -95,6 +95,7 @@ function renderCharts(data) {
                 legend: {
                     position: 'bottom', // Move legend to bottom
                     labels: {
+                        boxWidth: 20, // Reduced box width
                         font: {
                             size: 12 // Reduced font size for mobile
                         }
@@ -232,6 +233,7 @@ function renderCharts(data) {
                 legend: {
                     position: 'bottom', // Move legend to bottom
                     labels: {
+                        boxWidth: 20, // Reduced box width
                         font: {
                             size: 12 // Reduced font size for mobile
                         }
