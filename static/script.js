@@ -139,7 +139,7 @@ function renderCharts(data) {
                 },
                 y1: {
                     type: 'linear',
-                    display: true,
+                    display: false, // Hide USD/KRW axis on mobile
                     position: 'right',
                     title: {
                         display: true,
@@ -156,7 +156,7 @@ function renderCharts(data) {
                 },
                 y2: {
                     type: 'linear',
-                    display: true,
+                    display: false, // Hide US IR axis on mobile
                     position: 'left', // Changed position to left
                     title: {
                         display: true,
