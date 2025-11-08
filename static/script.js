@@ -53,7 +53,7 @@ function renderCharts(data) {
                 spanGaps: true,
             },
             {
-                label: 'USD/KRW Exchange Rate',
+                label: 'USD/KRW', // Changed label
                 data: alignedExchangeRates,
                 borderColor: 'rgba(54, 162, 235, 1)',
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -86,7 +86,7 @@ function renderCharts(data) {
             plugins: {
                 title: {
                     display: true,
-                    text: 'USD/KRW Exchange Rate, and US IR (since 2015)', // Updated title
+                    text: 'USD/KRW, KOSPI, and US IR (since 2015)', // Updated title
                     font: {
                         size: 12 // Reduced font size for mobile
                     },
