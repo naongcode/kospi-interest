@@ -121,7 +121,7 @@ function renderCharts(data) {
                 x: {
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 10 // Reduced max ticks for mobile
+                        maxTicksLimit: 5 // Reduced max ticks for mobile
                     }
                 },
                 y: {
