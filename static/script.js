@@ -121,7 +121,15 @@ function renderCharts(data) {
                 x: {
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 6 // Reduced max ticks for mobile
+                        maxTicksLimit: 5, // Reduced max ticks for mobile
+                        callback: function(value, index, ticks) {
+                            const year = value.substring(0, 4);
+                            const month = value.substring(5, 7);
+                            if (month === '01') {
+                                return "'" + year.substring(2);
+                            }
+                            return null;
+                        }
                     }
                 },
                 y: {
@@ -259,7 +267,15 @@ function renderCharts(data) {
                 x: {
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 6 // Reduced max ticks for mobile
+                        maxTicksLimit: 5, // Further reduced max ticks for mobile
+                        callback: function(value, index, ticks) {
+                            const year = value.substring(0, 4);
+                            const month = value.substring(5, 7);
+                            if (month === '01') {
+                                return "'" + year.substring(2);
+                            }
+                            return null;
+                        }
                     }
                 },
                 y: {
