@@ -45,12 +45,13 @@ function renderCharts(data) {
         labels: labels,
         datasets: [
             {
-                label: 'KOSPI (^KS11)',
+                label: 'KOSPI', // Changed label
                 data: alignedKospiPrices,
                 borderColor: 'rgba(255, 99, 132, 1)',
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 yAxisID: 'y',
                 spanGaps: true,
+                hidden: true // Hide KOSPI by default
             },
             {
                 label: 'USD/KRW Exchange Rate',
@@ -61,7 +62,7 @@ function renderCharts(data) {
                 spanGaps: true,
             },
             {
-                label: 'US Interest Rate',
+                label: 'US IR', // Changed to abbreviation
                 data: alignedInterestRates,
                 borderColor: 'rgba(153, 102, 255, 1)',
                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
@@ -86,7 +87,7 @@ function renderCharts(data) {
             plugins: {
                 title: {
                     display: true,
-                    text: 'KOSPI (^KS11) and USD/KRW Exchange Rate, and US Interest Rate (since 2015)',
+                    text: 'USD/KRW Exchange Rate, and US IR (since 2015)', // Updated title
                     font: {
                         size: 12 // Reduced font size for mobile
                     },
@@ -95,6 +96,10 @@ function renderCharts(data) {
                 legend: {
                     position: 'bottom', // Move legend to bottom
                     labels: {
+                        filter: function(legendItem, chartData) {
+                            // Only show USD/KRW and US IR in legend
+                            return legendItem.text === 'USD/KRW Exchange Rate' || legendItem.text === 'US IR';
+                        },
                         font: {
                             size: 12 // Reduced font size for mobile
                         }
@@ -129,7 +134,7 @@ function renderCharts(data) {
                     position: 'left',
                     title: {
                         display: true,
-                        text: 'KOSPI (^KS11)',
+                        text: 'KOSPI', // Changed title
                         color: 'rgba(255, 99, 132, 1)'
                     },
                     ticks: {
@@ -159,7 +164,7 @@ function renderCharts(data) {
                     position: 'right',
                     title: {
                         display: true,
-                        text: 'US Interest Rate (%)',
+                        text: 'US IR (%)', // Changed to abbreviation
                         color: 'rgba(153, 102, 255, 1)'
                     },
                     ticks: {
@@ -183,7 +188,7 @@ function renderCharts(data) {
         labels: labels,
         datasets: [
             {
-                label: 'US Interest Rate',
+                label: 'US IR', // Changed to abbreviation
                 data: alignedInterestRates,
                 borderColor: 'rgba(153, 102, 255, 1)',
                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
@@ -191,7 +196,7 @@ function renderCharts(data) {
                 spanGaps: true,
             },
             {
-                label: 'Korea Interest Rate',
+                label: 'KR IR', // Changed to abbreviation
                 data: alignedKoreaInterestRates,
                 borderColor: 'rgba(75, 192, 75, 1)',
                 backgroundColor: 'rgba(75, 192, 75, 0.2)',
@@ -199,7 +204,7 @@ function renderCharts(data) {
                 spanGaps: true,
             },
             {
-                label: 'Interest Rate Difference (US - KR)',
+                label: 'IR Diff (US - KR)', // Changed to abbreviation
                 data: alignedInterestRateDifference,
                 borderColor: 'rgba(255, 159, 64, 1)', // Orange color
                 backgroundColor: 'rgba(255, 159, 64, 0.2)',
@@ -223,7 +228,7 @@ function renderCharts(data) {
             plugins: {
                 title: {
                     display: true,
-                    text: 'US and Korea Interest Rates & Difference (since 2015)',
+                    text: 'US and KR IR & Diff (since 2015)', // Updated title
                     font: {
                         size: 12 // Reduced font size for mobile
                     },
@@ -266,7 +271,7 @@ function renderCharts(data) {
                     position: 'right',
                     title: {
                         display: true,
-                        text: 'Interest Rate (%)',
+                        text: 'IR (%)', // Changed to abbreviation
                         color: 'rgba(153, 102, 255, 1)' // Keep US color as primary
                     },
                     ticks: {
