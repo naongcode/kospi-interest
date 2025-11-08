@@ -121,10 +121,18 @@ function renderCharts(data) {
                 x: {
                     ticks: {
                         autoSkip: true,
+                        maxTicksLimit: 5, // Ensure max ticks limit is 5
                         callback: function(value, index, ticks) {
-                            const labelText = labels[index]; // Use labels array
-                            const year = labelText.substring(0, 4);
-                            return "'" + year.substring(2); // Always return year
+                            const totalLabels = labels.length;
+                            const desiredTicks = 5; // Target 5 labels
+                            const interval = Math.ceil(totalLabels / desiredTicks);
+
+                            if (index % interval === 0) {
+                                const labelText = labels[index];
+                                const year = labelText.substring(0, 4);
+                                return "'" + year.substring(2);
+                            }
+                            return null;
                         }
                     }
                 },
@@ -263,11 +271,18 @@ function renderCharts(data) {
                 x: {
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 5, // Further reduced max ticks for mobile
+                        maxTicksLimit: 5, // Ensure max ticks limit is 5
                         callback: function(value, index, ticks) {
-                            const labelText = labels[index]; // Use labels array
-                            const year = labelText.substring(0, 4);
-                            return "'" + year.substring(2); // Always return year
+                            const totalLabels = labels.length;
+                            const desiredTicks = 5; // Target 5 labels
+                            const interval = Math.ceil(totalLabels / desiredTicks);
+
+                            if (index % interval === 0) {
+                                const labelText = labels[index];
+                                const year = labelText.substring(0, 4);
+                                return "'" + year.substring(2);
+                            }
+                            return null;
                         }
                     }
                 },
